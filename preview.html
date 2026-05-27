@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Velora Parfums | Preview</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: "#050505",
+              gold: "#D4AF37",
+              goldLight: "#F3E5AB"
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          backgroundImage: {
+            'gold-glow': 'radial-gradient(circle, rgba(212,175,55,0.15) 0%, rgba(5,5,5,0) 70%)',
+            'glass': 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #050505;
+      color: white;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #050505; }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+    .text-glow { text-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+  </style>
+</head>
+<body>
+
+  <main class="min-h-screen bg-brand-black w-full overflow-hidden text-white">
+    <!-- Hero Section -->
+    <div id="hero-section" class="relative w-full h-screen bg-black">
+      
+      <!-- Loading State -->
+      <div id="loading" class="absolute inset-0 z-50 flex flex-col items-center justify-center bg-brand-black text-brand-gold">
+        <h2 class="font-serif text-2xl tracking-widest mb-4 uppercase">Film Sequence Loading</h2>
+        <div class="w-64 h-1 bg-gray-900 rounded-full overflow-hidden">
+          <div id="loading-bar" class="h-full bg-brand-gold transition-all duration-300" style="width: 0%"></div>
+        </div>
+        <p id="loading-text" class="mt-2 text-sm tracking-widest text-brand-gold/60">0%</p>
+      </div>
+
+      <!-- Overlays -->
+      <div class="absolute inset-0 pointer-events-none z-10 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_0%,rgba(5,5,5,0.8)_100%)]"></div>
+      <div class="absolute inset-0 pointer-events-none z-10 bg-gradient-to-b from-brand-black/40 via-transparent to-brand-black"></div>
+
+      <!-- Canvas -->
+      <canvas id="hero-canvas" class="absolute top-0 left-0 w-full h-full object-cover"></canvas>
+
+      <!-- Initial Text -->
+      <div id="initial-text" class="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+        <h1 class="font-serif text-6xl md:text-8xl text-white tracking-widest text-glow drop-shadow-2xl">
+          Velora Parfums
+        </h1>
+      </div>
+
+      <!-- Story Overlays -->
+      <div class="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
+        <div id="text-1" class="absolute opacity-0 flex flex-col items-center text-center px-4">
+          <h2 class="font-serif text-5xl md:text-7xl text-brand-gold tracking-wide mb-4 drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]">The Essence</h2>
+          <p class="font-sans text-lg md:text-xl text-white/90 max-w-lg font-light tracking-widest uppercase">A fragrance that transcends time</p>
+        </div>
+
+        <div id="text-2" class="absolute opacity-0 flex flex-col items-center text-center px-4">
+          <h2 class="font-serif text-5xl md:text-7xl text-white tracking-wide mb-4 drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]">Pure Elegance</h2>
+          <p class="font-sans text-lg md:text-xl text-brand-goldLight max-w-lg font-light tracking-widest uppercase">Crafted for the extraordinary</p>
+        </div>
+
+        <div id="text-3" class="absolute opacity-0 flex flex-col items-center text-center px-4">
+          <h2 class="font-serif text-4xl md:text-6xl text-brand-gold mb-6 drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]">Unleash Your Aura</h2>
+          <p class="font-sans text-base md:text-lg text-white/80 max-w-2xl leading-relaxed font-light">Every drop is a symphony of rare ingredients, meticulously blended to create an unforgettable signature. Discover the luxury that speaks before you do.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <section class="relative py-28 px-4 bg-brand-black overflow-hidden border-t border-white/5">
+      <div class="absolute inset-0 pointer-events-none bg-gold-glow opacity-30"></div>
+      <div class="max-w-6xl mx-auto relative z-10">
+        <div class="text-center mb-20">
+          <h2 class="font-serif text-4xl md:text-5xl text-brand-gold mb-6">The Art of Creation</h2>
+          <div class="w-px h-16 bg-gradient-to-b from-brand-gold to-transparent mx-auto"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+          
+          <div class="feature-card bg-glass backdrop-blur-md border border-white/10 p-10 rounded-sm relative group hover:border-brand-gold/30 transition-colors duration-500">
+            <h3 class="font-serif text-2xl text-white mb-4 tracking-wide">Rare Botanicals</h3>
+            <p class="font-sans text-white/60 font-light leading-relaxed">Sourced from the most exclusive regions worldwide, ensuring unparalleled quality.</p>
+          </div>
+          <div class="feature-card bg-glass backdrop-blur-md border border-white/10 p-10 rounded-sm relative group hover:border-brand-gold/30 transition-colors duration-500">
+            <h3 class="font-serif text-2xl text-white mb-4 tracking-wide">Artisan Crafted</h3>
+            <p class="font-sans text-white/60 font-light leading-relaxed">Blended by master perfumers using centuries-old traditional techniques.</p>
+          </div>
+          <div class="feature-card bg-glass backdrop-blur-md border border-white/10 p-10 rounded-sm relative group hover:border-brand-gold/30 transition-colors duration-500">
+            <h3 class="font-serif text-2xl text-white mb-4 tracking-wide">Lasting Sillage</h3>
+            <p class="font-sans text-white/60 font-light leading-relaxed">A complex formula designed to linger and evolve beautifully throughout the day.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Details -->
+    <section class="py-32 px-4 bg-brand-black relative border-t border-white/5">
+      <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div>
+            <h2 class="font-serif text-4xl text-brand-gold mb-8">Olfactory Profile</h2>
+            <div class="space-y-10">
+              <div class="group">
+                <h3 class="font-sans tracking-widest text-sm text-brand-goldLight uppercase mb-2">Top Notes</h3>
+                <p class="font-serif text-2xl text-white group-hover:text-brand-gold transition-colors">Bergamot, Pink Pepper, Saffron</p>
+                <div class="h-px w-full bg-white/10 mt-4 group-hover:bg-brand-gold/30 transition-colors"></div>
+              </div>
+              <div class="group">
+                <h3 class="font-sans tracking-widest text-sm text-brand-goldLight uppercase mb-2">Heart Notes</h3>
+                <p class="font-serif text-2xl text-white group-hover:text-brand-gold transition-colors">Damask Rose, Oud, Midnight Jasmine</p>
+                <div class="h-px w-full bg-white/10 mt-4 group-hover:bg-brand-gold/30 transition-colors"></div>
+              </div>
+              <div class="group">
+                <h3 class="font-sans tracking-widest text-sm text-brand-goldLight uppercase mb-2">Base Notes</h3>
+                <p class="font-serif text-2xl text-white group-hover:text-brand-gold transition-colors">Vanilla Absolute, Sandalwood, Ambergris</p>
+                <div class="h-px w-full bg-white/10 mt-4 group-hover:bg-brand-gold/30 transition-colors"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="relative h-full min-h-[400px] flex items-center justify-center">
+            <div class="absolute inset-0 bg-gold-glow opacity-50"></div>
+            <div class="w-64 h-64 rounded-full border border-brand-gold/20 flex items-center justify-center relative animate-[spin_60s_linear_infinite]">
+              <div class="w-48 h-48 rounded-full border border-brand-gold/30"></div>
+              <div class="absolute top-0 w-2 h-2 rounded-full bg-brand-gold shadow-[0_0_10px_#D4AF37]"></div>
+              <div class="absolute bottom-0 w-2 h-2 rounded-full bg-brand-gold shadow-[0_0_10px_#D4AF37]"></div>
+            </div>
+            <div class="absolute z-10 text-center">
+              <p class="font-serif italic text-brand-goldLight">100ml / 3.4 fl oz</p>
+              <p class="font-sans tracking-widest text-xs mt-2 text-white/50 uppercase">Extrait de Parfum</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="relative py-40 px-4 bg-brand-black flex flex-col items-center justify-center overflow-hidden border-t border-white/5">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(212,175,55,0.15)_0%,rgba(5,5,5,0)_60%)] pointer-events-none"></div>
+      <div class="relative z-10 text-center max-w-3xl mx-auto">
+        <h2 class="font-serif text-5xl md:text-7xl text-white mb-6 drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]">Claim Your Signature</h2>
+        <p class="font-sans text-lg md:text-xl text-white/70 font-light mb-12 max-w-xl mx-auto leading-relaxed">
+          The ultimate expression of luxury is now available. Secure your bottle of the extraordinary today.
+        </p>
+        <button class="group relative inline-flex items-center justify-center px-12 py-5 bg-brand-gold text-brand-black font-sans tracking-widest uppercase text-sm font-semibold overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)]">
+          <span class="relative z-10 transition-colors duration-300">Discover Now</span>
+          <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    const canvas = document.getElementById("hero-canvas");
+    const context = canvas.getContext("2d");
+    const heroSection = document.getElementById("hero-section");
+    
+    // Set canvas dimensions
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    const frameCount = 240;
+    const currentFrame = index => `./public/frames/ezgif-frame-${(index + 1).toString().padStart(3, '0')}.jpg`;
+
+    const images = [];
+    const state = { frame: 0 };
+    let loadedCount = 0;
+
+    // Preload images
+    for (let i = 0; i < frameCount; i++) {
+      const img = new Image();
+      img.src = currentFrame(i);
+      img.onload = () => {
+        loadedCount++;
+        const p = Math.round((loadedCount / frameCount) * 100);
+        document.getElementById('loading-bar').style.width = p + '%';
+        document.getElementById('loading-text').innerText = p + '%';
+        
+        if (loadedCount === frameCount) {
+          document.getElementById('loading').style.display = 'none';
+          initAnimation();
+        }
+      };
+      // In case of error (local path issue), try to ignore or handle
+      img.onerror = () => {
+        loadedCount++;
+        if (loadedCount === frameCount) {
+          document.getElementById('loading').style.display = 'none';
+          initAnimation();
+        }
+      };
+      images.push(img);
+    }
+
+    function render() {
+      const img = images[state.frame];
+      if (img && img.complete && img.naturalWidth !== 0) {
+        const canvasRatio = canvas.width / canvas.height;
+        const imgRatio = img.width / img.height;
+        let drawWidth, drawHeight, offsetX, offsetY;
+
+        if (canvasRatio > imgRatio) {
+          drawWidth = canvas.width;
+          drawHeight = canvas.width / imgRatio;
+          offsetX = 0;
+          offsetY = (canvas.height - drawHeight) / 2;
+        } else {
+          drawWidth = canvas.height * imgRatio;
+          drawHeight = canvas.height;
+          offsetX = (canvas.width - drawWidth) / 2;
+          offsetY = 0;
+        }
+
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+      }
+    }
+
+    function initAnimation() {
+      render();
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: heroSection,
+          start: "top top",
+          end: "+=400%",
+          scrub: 2,
+          pin: true,
+        }
+      });
+
+      tl.to(state, {
+        frame: frameCount - 1,
+        snap: "frame",
+        ease: "none",
+        onUpdate: render,
+      }, 0);
+
+      // Text Overlays
+      tl.to("#initial-text", { opacity: 0, y: -50, duration: 0.1 }, 0);
+      tl.fromTo("#text-1", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.2 }, 0.15)
+        .to("#text-1", { opacity: 0, y: -50, duration: 0.2 }, 0.35);
+      tl.fromTo("#text-2", { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 0.2 }, 0.45)
+        .to("#text-2", { opacity: 0, x: -50, duration: 0.2 }, 0.65);
+      tl.fromTo("#text-3", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.2 }, 0.75)
+        .to("#text-3", { opacity: 0, y: -50, duration: 0.2 }, 0.95);
+
+      // Features Animation
+      gsap.fromTo(".feature-card", 
+        { opacity: 0, y: 50, scale: 0.95 },
+        {
+          opacity: 1, y: 0, scale: 1, duration: 1, stagger: 0.2, ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".feature-card",
+            start: "top 80%"
+          }
+        }
+      );
+    }
+  </script>
+</body>
+</html>
